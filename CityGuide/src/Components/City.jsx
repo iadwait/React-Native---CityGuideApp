@@ -1,36 +1,40 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { HeartIcon } from 'react-native-heroicons/solid'
 import { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const { width, height } = Dimensions.get('window');
 
 const City = () => {
+    const navigation = useNavigation();
     const [favourite, setFavourite] = useState(false);
     return (
         <View style={{ alignItems: 'center' }}>
-            {/* City Element */}
-            <View style={styles.cityElement}>
-                {/* View Top */}
-                <View style={styles.viewTop}>
-                    <Image
-                        source={require('../Images/sampleCity.jpeg')}
-                        style={styles.cityImage}
-                    />
-                    <Text style={styles.cityName}>JAIPUR</Text>
-                    <TouchableOpacity style={styles.heartIcon} onPress={() => setFavourite(!favourite)}>
-                        <HeartIcon
-                            size="35"
-                            color={favourite ? 'red' : 'white'} />
-                    </TouchableOpacity>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('CityDetail')}>
+                {/* City Element */}
+                <View style={styles.cityElement}>
+                    {/* View Top */}
+                    <View style={styles.viewTop}>
+                        <Image
+                            source={require('../Images/sampleCity.jpeg')}
+                            style={styles.cityImage}
+                        />
+                        <Text style={styles.cityName}>JAIPUR</Text>
+                        <TouchableOpacity style={styles.heartIcon} onPress={() => setFavourite(!favourite)}>
+                            <HeartIcon
+                                size="35"
+                                color={favourite ? 'red' : 'white'} />
+                        </TouchableOpacity>
+                    </View>
+                    {/* View Bottom */}
+                    <View style={styles.viewBottom}>
+                        <Text style={{ textAlign: 'left', padding: 10 }}>
+                            Jaipur is the capital of India’s Rajasthan state. It evokes the royal family that once ruled the region and that, in 1727, founded what is now called the Old City, or “Pink City” for its trademark building color. At the center of its stately street grid (notable in India) stands the opulent, colonnaded City Palace complex. With gardens, courtyards and museums, part of it is still a royal residence.
+                        </Text>
+                    </View>
                 </View>
-                {/* View Bottom */}
-                <View style={styles.viewBottom}>
-                    <Text style={{ textAlign: 'left', padding: 10 }}>
-                        Jaipur is the capital of India’s Rajasthan state. It evokes the royal family that once ruled the region and that, in 1727, founded what is now called the Old City, or “Pink City” for its trademark building color. At the center of its stately street grid (notable in India) stands the opulent, colonnaded City Palace complex. With gardens, courtyards and museums, part of it is still a royal residence.
-                    </Text>
-                </View>
-            </View>
+            </TouchableWithoutFeedback>
         </View>
     )
 }

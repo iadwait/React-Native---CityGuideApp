@@ -1,6 +1,5 @@
 import { View, Text, Button, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import City from '../Components/City';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -8,7 +7,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
-    const navigation = useNavigation();
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1 }}>
@@ -34,13 +32,14 @@ const HomeScreen = () => {
                 </View>
 
                 {/* City List View*/}
-                <ScrollView style={styles.scrollView}>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                >
                     <City />
                     <City />
                     <City />
                     <City />
                 </ScrollView>
-                {/* <Button title='Go to Detail' onPress={() => navigation.navigate('CityDetail')} /> */}
             </View>
         </SafeAreaView>
     )
