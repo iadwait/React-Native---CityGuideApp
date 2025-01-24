@@ -1,0 +1,18 @@
+You need to make a react native based 2 page mobile app (iOS & android) as close to available mock up file as "city guide.pdf" or images (page_1.png and page_2.png). 
+
+Where you can store city information locally in the app, and available data regarding places like Jaipur city, Hawa Mahal, Albert Hall, Jantar Manatar, Amer Fort etc. you can take this data from wikipedia. Also you need to require weather information in app, you could use any available free services like http://openweathermap.org, also city lat long available on the API response to calculate the distance between user current location and the city.
+- Icon you could take from any websites likes icons8.com
+- Weather info & city lat long available at http://api.openweathermap.org/data/2.5/forecast?q=jaipur,in&appid=<your_key>
+- City info you could take from wikipedia
+- City and place images you could take by any free website as flicker/google.
+- Set Favorite functionality makes the city on the top and managed by locally.
+- Search function could be city or places like Hawa Mahal/ Amer fort/jaipur etc.
+
+
+Show your coding standards and creativity on behalf of available information. Your app should contain below features: 
+- Fetching user locations
+- API calling
+- Map on the detail screen (page_2.png).
+- Favorite functionality using Redux
+- City & places image need to be downloaded from some url, instead of local store.
+- Animation if possible.
