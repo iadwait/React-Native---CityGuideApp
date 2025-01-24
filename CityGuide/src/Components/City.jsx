@@ -26,6 +26,16 @@ const City = () => {
                                 size="35"
                                 color={favourite ? 'red' : 'white'} />
                         </TouchableOpacity>
+                        <View style={styles.viewInfo}>
+                            <Text style={styles.textInfo}>20°C Cloudy</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <Text style={styles.textInfo}>250 km</Text>
+                                <Image 
+                                    source={require('../Images/icon_greaterThan.png')}
+                                    style={{ tintColor: 'white', width: 20, height: 20 }}
+                                />
+                            </View>
+                        </View>
                     </View>
                     {/* View Bottom */}
                     <View style={styles.viewBottom}>
@@ -79,5 +89,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 10
+    },
+    viewInfo: {
+        position: 'absolute',
+        bottom: '10',
+        right: 10
+    },
+    textInfo: {
+        color: 'white',
+        fontWeight: '800'
     }
 })
