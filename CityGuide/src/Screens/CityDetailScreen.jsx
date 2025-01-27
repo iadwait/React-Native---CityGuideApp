@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, FlatList, ScrollView, Platform } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, FlatList, ScrollView, Platform, Alert } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
@@ -13,6 +13,10 @@ const CityDetailScreen = () => {
     const navigation = useNavigation();
     const [placesData, setPlaceData] = useState([1, 2, 3, 4, 5]);
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const showComingSoonAlert = () => {
+        Alert.alert('Alert', 'Feature Coming Soon')
+    }
 
     const coordinate = {
         latitude: 37.78825,
@@ -32,7 +36,7 @@ const CityDetailScreen = () => {
             </View>
             <View style={{ alignItems: 'center' }}>
                 <View style={styles.placeButtonView}>
-                    <TouchableOpacity style={styles.placeButtons}>
+                    <TouchableOpacity style={styles.placeButtons} onPress={showComingSoonAlert}>
                         <View style={styles.button}>
                             <Image
                                 source={require('../Images/icon_direction.png')}
@@ -43,7 +47,7 @@ const CityDetailScreen = () => {
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.placeButtons}>
+                    <TouchableOpacity style={styles.placeButtons} onPress={showComingSoonAlert}>
                         <View style={styles.button}>
                             <Image
                                 source={require('../Images/icon_cab.png')}
