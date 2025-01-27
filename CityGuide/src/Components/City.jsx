@@ -56,24 +56,20 @@ const styles = StyleSheet.create({
     cityElement: {
         // backgroundColor: 'green',
         width: width * 0.9,
-        height: height * 0.4,
         marginBottom: 20,
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 20,
     },
     viewTop: {
-        // backgroundColor: 'green',
-        height: 0.5,
         flex: 1
     },
     viewBottom: {
-        // backgroundColor: 'red',
-        height: 0.5,
         flex: 1
     },
     cityImage: {
         flex: 1,
+        height: height*0.18,
         width: '100%',
         opacity: 1
     },
