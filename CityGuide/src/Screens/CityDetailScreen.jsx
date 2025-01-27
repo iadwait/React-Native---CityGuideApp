@@ -113,6 +113,21 @@ const CityDetailScreen = () => {
                     />
                 </MapView>
             </View>
+            {/* Page Control */}
+            <View style={styles.pageControlView}>
+                {
+                    placesData.map((_, index) => (
+                        <View
+                            key={index}
+                            style={[
+                                styles.dot,
+                                currentIndex === index ? styles.activeDot : styles.inactiveDot,
+                            ]}
+                        >
+                        </View>
+                    ))
+                }
+            </View>
             {/* Places Details */}
             <View style={styles.placeView}>
                 <Carousel
@@ -126,9 +141,9 @@ const CityDetailScreen = () => {
                     width={width * 0.85}
                     // height={56}
                     data={placesData}
-                    scrollAnimationDuration={1500}
+                    //scrollAnimationDuration={1500}
                     renderItem={renderPlaces}
-                    onSnapToItem={(index) => console.log(`on item: ${index}`)}
+                    onSnapToItem={(index) => setCurrentIndex(index)}
                 />
             </View>
         </SafeAreaView>
@@ -163,7 +178,7 @@ const styles = StyleSheet.create({
     },
     placeView: {
         flex: 1,
-        marginVertical: 10,
+        marginBottom: Platform.OS === 'ios' ? 5 : 20,
         // backgroundColor: 'gray'
     },
     cardList: {
@@ -185,7 +200,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginHorizontal: 8,
-        marginVertical: 10,
         borderColor: 'gray',
         borderWidth: 1,
         overflow: 'hidden'
@@ -240,8 +254,28 @@ const styles = StyleSheet.create({
         height: 8,
         borderRadius: 4,
         backgroundColor: 'blue', // Active dot color
-      },
-      inactiveDotStyle: {
+    },
+    inactiveDotStyle: {
         backgroundColor: 'gray', // Inactive dot color
-      },
+    },
+    pageControlView: {
+        //backgroundColor: 'lightgreen',
+        height: 30,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    dot: {
+        width: 8,
+        height: 8,
+        backgroundColor: 'red',
+        marginHorizontal: 4,
+        borderRadius: 4
+    },
+    activeDot: {
+        backgroundColor: '#007BFF'
+    },
+    inactiveDot: {
+        backgroundColor: '#D3D3D3'
+    }
 })
