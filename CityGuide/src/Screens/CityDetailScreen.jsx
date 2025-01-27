@@ -6,6 +6,7 @@ import { HeartIcon } from 'react-native-heroicons/solid'
 import { useState } from 'react'
 import Carousel from 'react-native-reanimated-carousel';
 import MapView, { Marker } from 'react-native-maps';
+import { Linking } from 'react-native'
 
 const { width, height } = Dimensions.get('window');
 
@@ -18,6 +19,11 @@ const CityDetailScreen = () => {
         Alert.alert('Alert', 'Feature Coming Soon')
     }
 
+    const openLink = () => {
+        const url = 'https://en.wikipedia.org/wiki/Jaipur'
+        Linking.openURL(url).catch(err => Alert.alert('Error', 'Error Opening Browser'))
+    }
+
     const coordinate = {
         latitude: 37.78825,
         longitude: -122.4324
@@ -25,14 +31,22 @@ const CityDetailScreen = () => {
 
     const renderPlaces = ({ item }) => (
         <View style={styles.placeContainer}>
-            <View style={{ height: '50%', overflow: 'hidden' }}>
+            <View style={{ overflow: 'hidden' }}>
                 <View style={styles.placeTitleView}>
                     <Text style={{ fontSize: 24, marginLeft: 10, fontWeight: 'bold' }}>Hawa Mahal</Text>
                     <Text style={{ fontSize: 18, marginRight: 10, fontWeight: '600' }}>1.2 Km</Text>
                 </View>
-                <Text style={{ marginHorizontal: 10, lineHeight: 20 }} ellipsizeMode="tail" >
+                <Text style={{ marginHorizontal: 10 }} numberOfLines={10} ellipsizeMode="tail" >
                     The Hawa Mahal is a five-storey building, and it is the tallest building in the world that has been built without a foundation. It has a curved architecture that leans at an 87 degree angle, and a pyramidal shape which has helped it stay erect for centuries. The Hawa Mahal is dedicated to Lord Krishna.
+                    The Hawa Mahal is a five-storey building, and it is the tallest
+                    The Hawa Mahal is a five-storey building, and it is the tallest
+                    The Hawa Mahal is a five-storey building, and it is the tallest
                 </Text>
+                <TouchableOpacity onPress={openLink} style={{ marginLeft: 10, marginTop: 10 }}>
+                    <View>
+                        <Text style={styles.link}>Read more</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
             <View style={{ alignItems: 'center' }}>
                 <View style={styles.placeButtonView}>
@@ -281,5 +295,9 @@ const styles = StyleSheet.create({
     },
     inactiveDot: {
         backgroundColor: '#D3D3D3'
+    },
+    link: {
+        color: 'blue', // Set the color you want for the link
+        textDecorationLine: 'underline', // Optionally, underline the link
     }
 })
