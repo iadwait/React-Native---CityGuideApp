@@ -14,18 +14,17 @@ const CityDetailScreen = () => {
 
     const renderPlaces = ({ item }) => (
         <View style={styles.placeContainer}>
-            <View style={{ height: '55%',  overflow: 'hidden' }}>
+            <View style={{ height: '50%', overflow: 'hidden' }}>
                 <View style={styles.placeTitleView}>
                     <Text style={{ fontSize: 24, marginLeft: 10, fontWeight: 'bold' }}>Hawa Mahal</Text>
                     <Text style={{ fontSize: 18, marginRight: 10, fontWeight: '600' }}>1.2 Km</Text>
                 </View>
-                <Text style={{ marginHorizontal: 10, lineHeight: 20}} ellipsizeMode="tail">
+                <Text style={{ marginHorizontal: 10, lineHeight: 20 }} ellipsizeMode="tail" >
                     The Hawa Mahal is a five-storey building, and it is the tallest building in the world that has been built without a foundation. It has a curved architecture that leans at an 87 degree angle, and a pyramidal shape which has helped it stay erect for centuries. The Hawa Mahal is dedicated to Lord Krishna.
-
                 </Text>
             </View>
-            <View style={{ alignItems: 'center', height: '30%' }}>
-            <View style={styles.placeButtonView}>
+            <View style={{ alignItems: 'center' }}>
+                <View style={styles.placeButtonView}>
                     <TouchableOpacity style={styles.placeButtons}>
                         <View style={styles.button}>
                             <Image
@@ -49,16 +48,16 @@ const CityDetailScreen = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row', marginVertical: 10}}>
-                    <Image 
+                <View style={{ flexDirection: 'row' }}>
+                    <Image
                         source={require('../Images/HawaMahal1.jpeg')}
                         style={styles.placeImages}
                     />
-                    <Image 
+                    <Image
                         source={require('../Images/HawaMahal2.jpeg')}
                         style={styles.placeImages}
                     />
-                    <Image 
+                    <Image
                         source={require('../Images/HawaMahal3.jpeg')}
                         style={styles.placeImages}
                     />
@@ -156,11 +155,13 @@ const styles = StyleSheet.create({
     placeContainer: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'space-between',
         // backgroundColor: 'lightgreen',
         marginHorizontal: 8,
         marginVertical: 10,
         borderColor: 'gray',
-        borderWidth: 1
+        borderWidth: 1,
+        overflow: 'hidden'
     },
     placeTitleView: {
         flexDirection: 'row',
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     },
     placeButtonView: {
         width: '100%',
-        paddingVertical: 20,
+        paddingVertical: 10,
         flexDirection: 'row',
     },
     placeButtons: {
@@ -202,6 +203,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         borderRadius: 10,
         borderColor: 'gray',
-        borderWidth: 1
+        borderWidth: 1,
+        marginBottom: 5
     }
 })
