@@ -1,16 +1,23 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, FlatList, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, FlatList, ScrollView, Platform } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { HeartIcon } from 'react-native-heroicons/solid'
 import { useState } from 'react'
 import Carousel from 'react-native-reanimated-carousel';
+import MapView, { Marker } from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
 
 const CityDetailScreen = () => {
     const navigation = useNavigation();
     const [placesData, setPlaceData] = useState([1, 2, 3, 4, 5]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const coordinate = {
+        latitude: 37.78825,
+        longitude: -122.4324
+    }
 
     const renderPlaces = ({ item }) => (
         <View style={styles.placeContainer}>
@@ -85,7 +92,26 @@ const CityDetailScreen = () => {
             </View>
             {/* MapView */}
             <View style={styles.mapView}>
-                <Text>TODO: MAP VIEW</Text>
+                {/* <Text>TODO: MAP VIEW</Text> */}
+                <MapView
+                    style={styles.map}
+                    initialRegion={{
+                        latitude: coordinate.latitude,
+                        longitude: coordinate.longitude,
+                        latitudeDelta: 0.05,  // zoom level
+                        longitudeDelta: 0.05, // zoom level
+                    }}
+                    mapType="standard"
+                >
+                    {/* Add a marker on the map */}
+                    <Marker
+                        coordinate={coordinate}
+                        title="My Location"
+                        description="This is my pinned location!"
+                        pinColor="red"
+                        style={{ zIndex: 999 }}
+                    />
+                </MapView>
             </View>
             {/* Places Details */}
             <View style={styles.placeView}>
@@ -102,6 +128,7 @@ const CityDetailScreen = () => {
                     data={placesData}
                     scrollAnimationDuration={1500}
                     renderItem={renderPlaces}
+                    onSnapToItem={(index) => console.log(`on item: ${index}`)}
                 />
             </View>
         </SafeAreaView>
@@ -112,7 +139,8 @@ export default CityDetailScreen
 
 const styles = StyleSheet.create({
     viewNavigation: {
-        padding: 25,
+        paddingHorizontal: 12,
+        paddingVertical: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -156,7 +184,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        // backgroundColor: 'lightgreen',
         marginHorizontal: 8,
         marginVertical: 10,
         borderColor: 'gray',
@@ -182,11 +209,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     placeButtons: {
-        // backgroundColor: 'green',
         width: width * 0.3,
         marginHorizontal: '10',
         paddingHorizontal: 10,
-        paddingVertical: 5,
         borderColor: 'gray',
         borderWidth: 2,
         borderRadius: 10,
@@ -205,5 +230,18 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 5
-    }
+    },
+    map: {
+        width: '100%',
+        height: '100%'
+    },
+    dotStyle: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'blue', // Active dot color
+      },
+      inactiveDotStyle: {
+        backgroundColor: 'gray', // Inactive dot color
+      },
 })
