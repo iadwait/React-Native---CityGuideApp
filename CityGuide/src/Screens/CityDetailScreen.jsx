@@ -73,7 +73,7 @@ const CityDetailScreen = ({ route }) => {
             <View style={styles.placeContainer}>
                 <View style={{ overflow: 'hidden' }}>
                     <View style={styles.placeTitleView}>
-                        <Text style={{ fontSize: 24, marginLeft: 10, fontWeight: 'bold' }}>{place.item.name}</Text>
+                        <Text style={{ fontSize: 20, marginLeft: 10, fontWeight: 'bold' }}>{place.item.name}</Text>
                         <Text style={{ fontSize: 18, marginRight: 10, fontWeight: '600' }}>{place.item.distance_from_city_center_km} Km</Text>
                     </View>
                     <Text style={{ marginHorizontal: 10 }} numberOfLines={10} ellipsizeMode="tail" >
