@@ -38,6 +38,7 @@ const CityDetailScreen = ({ route }) => {
         setCityDetails(data[0]);
     }
 
+    // Update Local params after getting city details
     useEffect(() => {
         if (cityDetails && cityDetails.latitude && cityDetails.longitude) {
             setCoordinates({
@@ -46,6 +47,11 @@ const CityDetailScreen = ({ route }) => {
             });
             console.log(`Lat = ${cityDetails.latitude}, Long = ${cityDetails.longitude}`);
         }
+
+        if (cityDetails && cityDetails.places) {
+            console.log('Places = ', cityDetails.places.length)
+        }
+
     }, [cityDetails]);  // This effect will run whenever cityDetails is updated
 
     useEffect(() => {
@@ -137,16 +143,16 @@ const CityDetailScreen = ({ route }) => {
                     region={{
                         latitude: coordinate.latitude,
                         longitude: coordinate.longitude,
-                        latitudeDelta: 0.05,  // zoom level
-                        longitudeDelta: 0.05, // zoom level
+                        latitudeDelta: 0.07,  // zoom level
+                        longitudeDelta: 0.07, // zoom level
                     }}
                     mapType="standard"
                 >
                     {/* Add a marker on the map */}
                     <Marker
                         coordinate={coordinate}
-                        title="My Location"
-                        description="This is my pinned location!"
+                        title={cityDetails.name}
+                        description={`This is ${cityDetails.name} City !!`}
                         pinColor="red"
                         style={{ zIndex: 999 }}
                     />
