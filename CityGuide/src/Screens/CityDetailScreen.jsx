@@ -38,9 +38,6 @@ const CityDetailScreen = () => {
                 </View>
                 <Text style={{ marginHorizontal: 10 }} numberOfLines={10} ellipsizeMode="tail" >
                     The Hawa Mahal is a five-storey building, and it is the tallest building in the world that has been built without a foundation. It has a curved architecture that leans at an 87 degree angle, and a pyramidal shape which has helped it stay erect for centuries. The Hawa Mahal is dedicated to Lord Krishna.
-                    The Hawa Mahal is a five-storey building, and it is the tallest
-                    The Hawa Mahal is a five-storey building, and it is the tallest
-                    The Hawa Mahal is a five-storey building, and it is the tallest
                 </Text>
                 <TouchableOpacity onPress={openLink} style={{ marginLeft: 10, marginTop: 10 }}>
                     <View>

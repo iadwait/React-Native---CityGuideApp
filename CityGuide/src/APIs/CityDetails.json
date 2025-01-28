@@ -1,0 +1,240 @@
+{
+    "cities": [
+      {
+        "name": "New Delhi",
+        "places": [
+          {
+            "name": "India Gate",
+            "latitude": 28.6129,
+            "longitude": 77.2295,
+            "distance_from_city_center_km": 0.5,
+            "description": "India Gate is a war memorial located in the heart of New Delhi. It was built in honor of soldiers who died during World War I. The gate stands at 42 meters high and is one of the most iconic landmarks in India.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/India_Gate"
+          },
+          {
+            "name": "Red Fort",
+            "latitude": 28.6562,
+            "longitude": 77.2410,
+            "distance_from_city_center_km": 2.0,
+            "description": "The Red Fort is a historic fortification in the city of New Delhi. It served as the main residence of the Mughal emperors for around 200 years, until the British colonial era. It is now a UNESCO World Heritage Site.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Red_Fort"
+          },
+          {
+            "name": "Qutub Minar",
+            "latitude": 28.5244,
+            "longitude": 77.1855,
+            "distance_from_city_center_km": 14.0,
+            "description": "Qutub Minar is a 73-meter-high tower in the Mehrauli area of Delhi. It is a UNESCO World Heritage Site and is the tallest brick minaret in the world, built to mark the beginning of Muslim rule in India.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Qutub_Minar"
+          },
+          {
+            "name": "Humayun's Tomb",
+            "latitude": 28.5941,
+            "longitude": 77.2506,
+            "distance_from_city_center_km": 6.0,
+            "description": "Humayun's Tomb is the tomb of the Mughal Emperor Humayun in New Delhi. It is the first garden-tomb on the Indian subcontinent and was commissioned by his widow, Empress Bega Begum. The tomb is a UNESCO World Heritage Site.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Humayun%27s_Tomb"
+          },
+          {
+            "name": "Lotus Temple",
+            "latitude": 28.5535,
+            "longitude": 77.2588,
+            "distance_from_city_center_km": 9.5,
+            "description": "The Lotus Temple, dedicated to the Bahá'í Faith, is a Bahá'í House of Worship. Its flowerlike architecture has made it an iconic symbol of modern Delhi. The temple is open to people of all faiths for meditation and prayer.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Lotus_Temple"
+          }
+        ]
+      },
+      {
+        "name": "Mumbai",
+        "places": [
+          {
+            "name": "Gateway of India",
+            "latitude": 18.9220,
+            "longitude": 72.8347,
+            "distance_from_city_center_km": 1.5,
+            "description": "The Gateway of India is an arch monument built in honor of King George V and Queen Mary's visit to India in 1911. It stands at the waterfront in South Mumbai and is one of the most famous landmarks in India.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Gateway_of_India"
+          },
+          {
+            "name": "Marine Drive",
+            "latitude": 18.9398,
+            "longitude": 72.8260,
+            "distance_from_city_center_km": 2.0,
+            "description": "Marine Drive is a 3.6-kilometer-long boulevard along the Arabian Sea in South Mumbai. It's also known as the 'Queen's Necklace' due to the shape of the lit-up street lights at night.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Marine_Drive,_Mumbai"
+          },
+          {
+            "name": "Elephanta Caves",
+            "latitude": 18.9222,
+            "longitude": 72.9333,
+            "distance_from_city_center_km": 10.0,
+            "description": "Elephanta Caves are a group of rock-cut temples on Elephanta Island, located 11 kilometers from Mumbai. These caves are dedicated to the Hindu god Shiva and are a UNESCO World Heritage Site.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Elephanta_Caves"
+          },
+          {
+            "name": "Chhatrapati Shivaji Maharaj Terminus",
+            "latitude": 18.9407,
+            "longitude": 72.8352,
+            "distance_from_city_center_km": 1.0,
+            "description": "Chhatrapati Shivaji Maharaj Terminus (CST) is a historic railway station in Mumbai. It is known for its Victorian Gothic architecture and is a UNESCO World Heritage Site.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Chhatrapati_Shibaji_Maharaj_Terminus"
+          }
+        ]
+      },
+      {
+        "name": "Pune",
+        "places": [
+          {
+            "name": "Shaniwar Wada",
+            "latitude": 18.5196,
+            "longitude": 73.8558,
+            "distance_from_city_center_km": 2.0,
+            "description": "Shaniwar Wada is a historical fortification in the city of Pune, built in 1732. It was the seat of the Peshwa rulers of the Maratha Empire. The fort is known for its architectural grandeur and historical significance.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Shaniwar_Wada"
+          },
+          {
+            "name": "Aga Khan Palace",
+            "latitude": 18.5327,
+            "longitude": 73.8786,
+            "distance_from_city_center_km": 7.0,
+            "description": "Aga Khan Palace is a historical palace located in Pune, known for its association with Mahatma Gandhi during the Indian independence movement. It was used as a prison by the British colonial government.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Aga_Khan_Palace"
+          },
+          {
+            "name": "Sinhagad Fort",
+            "latitude": 18.3946,
+            "longitude": 73.9250,
+            "distance_from_city_center_km": 30.0,
+            "description": "Sinhagad Fort is a historic fort located 30 kilometers from Pune. It is famous for its role in various battles and as a symbol of Maratha valor. The fort offers panoramic views of the surrounding region.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Sinhagad"
+          },
+          {
+            "name": "Osho Ashram",
+            "latitude": 18.5182,
+            "longitude": 73.8560,
+            "distance_from_city_center_km": 5.0,
+            "description": "Osho Ashram, also known as Osho International Meditation Resort, is a spiritual retreat center in Pune. It attracts people from all over the world seeking meditation, yoga, and a peaceful environment.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Osho_International_Meditation_Resort"
+          }
+        ]
+      },
+      {
+        "name": "Bengaluru",
+        "places": [
+          {
+            "name": "Bangalore Palace",
+            "latitude": 12.9983,
+            "longitude": 77.5902,
+            "distance_from_city_center_km": 3.0,
+            "description": "Bangalore Palace is a royal residence built in the Tudor style. It features elegant wood carvings, intricate stained-glass windows, and royal artifacts.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Bangalore_Palace"
+          },
+          {
+            "name": "Cubbon Park",
+            "latitude": 12.9760,
+            "longitude": 77.5936,
+            "distance_from_city_center_km": 1.5,
+            "description": "Cubbon Park is a large green park located in the heart of Bengaluru. It is an ideal place for outdoor activities, walking, and relaxation, with lush greenery and historical monuments.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Cubbon_Park"
+          },
+          {
+            "name": "Lalbagh Botanical Garden",
+            "latitude": 12.9490,
+            "longitude": 77.5848,
+            "distance_from_city_center_km": 4.0,
+            "description": "Lalbagh is a well-known botanical garden in Bengaluru, which houses over 1,000 species of plants. The glasshouse in the garden hosts the annual flower show.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Lalbagh_Botanical_Garden"
+          }
+        ]
+      },
+      {
+        "name": "Chennai",
+        "places": [
+          {
+            "name": "Marina Beach",
+            "latitude": 13.0674,
+            "longitude": 80.2785,
+            "distance_from_city_center_km": 0.5,
+            "description": "Marina Beach is the longest urban beach in India, stretching for over 13 kilometers along the Bay of Bengal. It's a popular spot for relaxation and local activities.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Marina_Beach,_Chennai"
+          },
+          {
+            "name": "Kapaleeshwarar Temple",
+            "latitude": 13.0355,
+            "longitude": 80.2800,
+            "distance_from_city_center_km": 3.0,
+            "description": "Kapaleeshwarar Temple is a Dravidian-style Hindu temple dedicated to Lord Shiva. It is a significant pilgrimage site and a cultural landmark in Chennai.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Kapaleeshwarar_Temple"
+          },
+          {
+            "name": "Fort St. George",
+            "latitude": 13.0878,
+            "longitude": 80.2785,
+            "distance_from_city_center_km": 1.0,
+            "description": "Fort St. George is a historic fort built by the British East India Company. It houses the Tamil Nadu Legislative Assembly and a museum showcasing colonial-era artifacts.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Fort_St._George,_Chennai"
+          }
+        ]
+      },
+      {
+        "name": "Hyderabad",
+        "places": [
+          {
+            "name": "Charminar",
+            "latitude": 17.3616,
+            "longitude": 78.4747,
+            "distance_from_city_center_km": 1.0,
+            "description": "Charminar is a 16th-century mosque with four grand arches, located in the heart of Hyderabad. It is one of the most recognized structures in the city.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Charminar"
+          },
+          {
+            "name": "Golconda Fort",
+            "latitude": 17.3847,
+            "longitude": 78.4010,
+            "distance_from_city_center_km": 11.0,
+            "description": "Golconda Fort is a medieval fort located on the outskirts of Hyderabad. It was once the capital of the Qutb Shahi dynasty and is known for its acoustics and impressive structures.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Golconda"
+          },
+          {
+            "name": "Hussain Sagar Lake",
+            "latitude": 17.4265,
+            "longitude": 78.4740,
+            "distance_from_city_center_km": 5.0,
+            "description": "Hussain Sagar is a man-made lake in the heart of Hyderabad, known for its giant Buddha statue located on an island in the center of the lake.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Hussain_Sagar"
+          }
+        ]
+      },
+      {
+        "name": "Kolkata",
+        "places": [
+          {
+            "name": "Victoria Memorial",
+            "latitude": 22.5440,
+            "longitude": 88.3426,
+            "distance_from_city_center_km": 2.0,
+            "description": "Victoria Memorial is an iconic building in Kolkata dedicated to Queen Victoria. It's now a museum and is surrounded by lush gardens and fountains.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Victoria_Memorial"
+          },
+          {
+            "name": "Howrah Bridge",
+            "latitude": 22.5950,
+            "longitude": 88.2632,
+            "distance_from_city_center_km": 1.5,
+            "description": "Howrah Bridge is a cantilevered bridge connecting Kolkata with Howrah. It is one of the busiest bridges in the world and a significant landmark of Kolkata.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Howrah_Bridge"
+          },
+          {
+            "name": "Indian Museum",
+            "latitude": 22.5687,
+            "longitude": 88.3541,
+            "distance_from_city_center_km": 1.0,
+            "description": "The Indian Museum is the largest and oldest museum in India, housing a vast range of collections from art to archaeology.",
+            "wikipedia_link": "https://en.wikipedia.org/wiki/Indian_Museum"
+          }
+        ]
+      }
+    ]
+  }
+  

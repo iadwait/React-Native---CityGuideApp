@@ -1,12 +1,32 @@
-import { View, Text, Button, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Button, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import City from '../Components/City';
 import { ScrollView } from 'react-native-gesture-handler';
+import axios from 'axios';
+import { useState, useEffect } from 'react'
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
+    const citiesEndpoint = 'http://localhost:3001/cities'
+    const [cities, setCitiesData] = useState([]);
+
+    const getCitiesDetails = async () => {
+        try {
+            const response = await axios.get(citiesEndpoint)
+            console.log(JSON.stringify(response.data, null, 2));
+            setCitiesData(response.data)
+        } catch (error) {
+            Alert.alert('Error', `Error fetching cities data: ${error}`)
+        }
+    }
+
+    // View will Appear
+    useEffect(() => {
+        getCitiesDetails()
+    }, [])
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1 }}>
@@ -35,10 +55,11 @@ const HomeScreen = () => {
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >
-                    <City />
-                    <City />
-                    <City />
-                    <City />
+                    {
+                        cities.map((city, index) => (
+                            <City key={index} city={city} />       
+                        ))
+                    }
                 </ScrollView>
             </View>
         </SafeAreaView>

@@ -1,14 +1,17 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { HeartIcon } from 'react-native-heroicons/solid'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 const { width, height } = Dimensions.get('window');
 
-const City = () => {
+const City = ({ city }) => {
     const navigation = useNavigation();
     const [favourite, setFavourite] = useState(false);
+    useEffect(() => {
+        console.log(city)
+    }, [])
     return (
         <View style={{ alignItems: 'center' }}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('CityDetail')}>
@@ -20,17 +23,19 @@ const City = () => {
                             source={require('../Images/sampleCity.jpeg')}
                             style={styles.cityImage}
                         />
-                        <Text style={styles.cityName}>JAIPUR</Text>
+                        <Text style={styles.cityName}>{city.name}</Text>
                         <TouchableOpacity style={styles.heartIcon} onPress={() => setFavourite(!favourite)}>
                             <HeartIcon
                                 size="35"
                                 color={favourite ? 'red' : 'white'} />
                         </TouchableOpacity>
                         <View style={styles.viewInfo}>
-                            <Text style={styles.textInfo}>20°C Cloudy</Text>
+                            <Text style={styles.textInfo}>
+                                {city.degree_of_weather} {city.weather}
+                            </Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                <Text style={styles.textInfo}>250 km</Text>
-                                <Image 
+                                <Text style={styles.textInfo}>{city.distance_from_previous} km</Text>
+                                <Image
                                     source={require('../Images/icon_greaterThan.png')}
                                     style={{ tintColor: 'white', width: 20, height: 20 }}
                                 />
@@ -40,7 +45,7 @@ const City = () => {
                     {/* View Bottom */}
                     <View style={styles.viewBottom}>
                         <Text style={{ textAlign: 'left', padding: 10 }}>
-                            Jaipur is the capital of India’s Rajasthan state. It evokes the royal family that once ruled the region and that, in 1727, founded what is now called the Old City, or “Pink City” for its trademark building color. At the center of its stately street grid (notable in India) stands the opulent, colonnaded City Palace complex. With gardens, courtyards and museums, part of it is still a royal residence.
+                            {city.description}
                         </Text>
                     </View>
                 </View>
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     },
     cityImage: {
         flex: 1,
-        height: height*0.18,
+        height: height * 0.18,
         width: '100%',
         opacity: 1
     },
