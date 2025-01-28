@@ -3,14 +3,18 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { HeartIcon } from 'react-native-heroicons/solid'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Carousel from 'react-native-reanimated-carousel';
 import MapView, { Marker } from 'react-native-maps';
 import { Linking } from 'react-native'
 
 const { width, height } = Dimensions.get('window');
 
-const CityDetailScreen = () => {
+const CityDetailScreen = ({ route }) => {
+    // Get Passed Data
+    const { cityData } = route.params
+    // const cityDetailsEndpoint = `http://localhost:3002/cities?name=${city.name}`
+    const [cities, setCitiesData] = useState([]);
     const navigation = useNavigation();
     const [placesData, setPlaceData] = useState([1, 2, 3, 4, 5]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,6 +32,10 @@ const CityDetailScreen = () => {
         latitude: 37.78825,
         longitude: -122.4324
     }
+
+    useEffect(() => {
+        console.log('City Detail Screen: ', cityData)
+    },[])
 
     const renderPlaces = ({ item }) => (
         <View style={styles.placeContainer}>
@@ -98,7 +106,7 @@ const CityDetailScreen = () => {
                         style={styles.iconBack}
                     />
                 </TouchableOpacity>
-                <Text style={styles.title}>JAIPUR</Text>
+                <Text style={styles.title}>{cityData.name}</Text>
                 <TouchableOpacity>
                     <HeartIcon
                         size="35"

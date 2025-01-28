@@ -3,8 +3,8 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import City from '../Components/City';
 import { ScrollView } from 'react-native-gesture-handler';
-import axios from 'axios';
 import { useState, useEffect } from 'react'
+import { fetchCitiesListData } from '../NetworkManager/NetworkManager';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,9 +14,9 @@ const HomeScreen = () => {
 
     const getCitiesDetails = async () => {
         try {
-            const response = await axios.get(citiesEndpoint)
-            console.log(JSON.stringify(response.data, null, 2));
-            setCitiesData(response.data)
+            const data = await fetchCitiesListData();
+            console.log(JSON.stringify(data, null, 2));
+            setCitiesData(data)
         } catch (error) {
             Alert.alert('Error', `Error fetching cities data: ${error}`)
         }
