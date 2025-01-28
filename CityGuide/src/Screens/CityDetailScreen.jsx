@@ -13,7 +13,7 @@ const { width, height } = Dimensions.get('window');
 
 const CityDetailScreen = ({ route }) => {
     // Get Passed Data
-    const { cityData } = route.params
+    const { cityData, isLiked } = route.params
     const navigation = useNavigation();
     const [cityDetails, setCityDetails] = useState({})
     const [coordinate, setCoordinates] = useState({
@@ -143,12 +143,12 @@ const CityDetailScreen = ({ route }) => {
                 <TouchableOpacity>
                     <HeartIcon
                         size="35"
-                        color={'red'} />
+                        color={isLiked ? 'red' : 'lightgray'}
+                    />
                 </TouchableOpacity>
             </View>
             {/* MapView */}
             <View style={styles.mapView}>
-                {/* <Text>TODO: MAP VIEW</Text> */}
                 <MapView
                     style={styles.map}
                     region={{
@@ -235,13 +235,12 @@ const styles = StyleSheet.create({
     placeView: {
         flex: 1,
         marginBottom: Platform.OS === 'ios' ? 5 : 20,
-        // backgroundColor: 'gray'
     },
     cardList: {
         paddingLeft: 20,
     },
     card: {
-        width: width * 0.7, // Each card takes up 60% of the screen width
+        width: width * 0.7,
         height: height * 0.35,
         marginRight: 15,
         borderRadius: 10,
@@ -249,7 +248,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderColor: 'gray',
         borderWidth: 1,
-        //backgroundColor: 'red'
     },
     placeContainer: {
         flex: 1,
@@ -264,7 +262,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor: 'red',
         height: 50,
         width: '100%',
     },
@@ -315,7 +312,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray', // Inactive dot color
     },
     pageControlView: {
-        //backgroundColor: 'lightgreen',
         height: 30,
         flexDirection: 'row',
         alignItems: 'center',
@@ -335,7 +331,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#D3D3D3'
     },
     link: {
-        color: 'blue', // Set the color you want for the link
-        textDecorationLine: 'underline', // Optionally, underline the link
+        color: 'blue',
+        textDecorationLine: 'underline',
     }
 })

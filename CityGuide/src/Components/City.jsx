@@ -14,7 +14,7 @@ const City = ({ city }) => {
     }, [])
     return (
         <View style={{ alignItems: 'center' }}>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('CityDetail', {cityData: city})}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('CityDetail', {cityData: city, isLiked: favourite})}>
                 {/* City Element */}
                 <View style={styles.cityElement}>
                     {/* View Top */}
