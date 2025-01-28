@@ -7,15 +7,19 @@ import { useState, useEffect } from 'react'
 import Carousel from 'react-native-reanimated-carousel';
 import MapView, { Marker } from 'react-native-maps';
 import { Linking } from 'react-native'
+import { fetchCityData } from '../NetworkManager/NetworkManager'
 
 const { width, height } = Dimensions.get('window');
 
 const CityDetailScreen = ({ route }) => {
     // Get Passed Data
     const { cityData } = route.params
-    // const cityDetailsEndpoint = `http://localhost:3002/cities?name=${city.name}`
-    const [cities, setCitiesData] = useState([]);
     const navigation = useNavigation();
+    const [cityDetails, setCityDetails] = useState({})
+    const [coordinate, setCoordinates] = useState({
+        latitude: 0,
+        longitude: 0
+    })
     const [placesData, setPlaceData] = useState([1, 2, 3, 4, 5]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -28,13 +32,25 @@ const CityDetailScreen = ({ route }) => {
         Linking.openURL(url).catch(err => Alert.alert('Error', 'Error Opening Browser'))
     }
 
-    const coordinate = {
-        latitude: 37.78825,
-        longitude: -122.4324
+    const fetchCityDetail = async () => {
+        const data = await fetchCityData(cityData.name);
+        console.log('Complete: ', data[0])
+        setCityDetails(data[0]);
     }
 
     useEffect(() => {
-        console.log('City Detail Screen: ', cityData)
+        if (cityDetails && cityDetails.latitude && cityDetails.longitude) {
+            setCoordinates({
+                latitude: cityDetails.latitude,
+                longitude: cityDetails.longitude,
+            });
+            console.log(`Lat = ${cityDetails.latitude}, Long = ${cityDetails.longitude}`);
+        }
+    }, [cityDetails]);  // This effect will run whenever cityDetails is updated
+
+    useEffect(() => {
+        console.log('Inside Details Screen')
+        fetchCityDetail();
     },[])
 
     const renderPlaces = ({ item }) => (
@@ -118,7 +134,7 @@ const CityDetailScreen = ({ route }) => {
                 {/* <Text>TODO: MAP VIEW</Text> */}
                 <MapView
                     style={styles.map}
-                    initialRegion={{
+                    region={{
                         latitude: coordinate.latitude,
                         longitude: coordinate.longitude,
                         latitudeDelta: 0.05,  // zoom level
