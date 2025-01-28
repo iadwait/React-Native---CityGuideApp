@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         borderRadius: 20,
+        overflow: 'hidden'
     },
     viewTop: {
         flex: 1
