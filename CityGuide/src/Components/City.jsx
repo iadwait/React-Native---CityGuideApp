@@ -20,7 +20,8 @@ const City = ({ city }) => {
                     {/* View Top */}
                     <View style={styles.viewTop}>
                         <Image
-                            source={require('../Images/sampleCity.jpeg')}
+                            //source={require('../Images/sampleCity.jpeg')}
+                            source={{ uri: city.image_url }}
                             style={styles.cityImage}
                         />
                         <Text style={styles.cityName}>{city.name}</Text>
