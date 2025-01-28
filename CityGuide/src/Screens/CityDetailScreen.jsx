@@ -20,15 +20,15 @@ const CityDetailScreen = ({ route }) => {
         latitude: 0,
         longitude: 0
     })
-    const [placesData, setPlaceData] = useState([1, 2, 3, 4, 5]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [placesData, setPlaceData] = useState([]);
 
     const showComingSoonAlert = () => {
         Alert.alert('Alert', 'Feature Coming Soon')
     }
 
-    const openLink = () => {
-        const url = 'https://en.wikipedia.org/wiki/Jaipur'
+    const openLink = (link) => {
+        const url = link
         Linking.openURL(url).catch(err => Alert.alert('Error', 'Error Opening Browser'))
     }
 
@@ -50,73 +50,84 @@ const CityDetailScreen = ({ route }) => {
 
         if (cityDetails && cityDetails.places) {
             console.log('Places = ', cityDetails.places.length)
+            setPlaceData(cityDetails.places)
+            console.log(`Places = ${placesData}`)
         }
 
     }, [cityDetails]);  // This effect will run whenever cityDetails is updated
 
     useEffect(() => {
+        console.log(`Updated Places = ${placesData}`);
+    }, [placesData]);  // This will log placesData when it change
+
+    useEffect(() => {
         console.log('Inside Details Screen')
         fetchCityDetail();
-    },[])
+    }, [])
 
-    const renderPlaces = ({ item }) => (
-        <View style={styles.placeContainer}>
-            <View style={{ overflow: 'hidden' }}>
-                <View style={styles.placeTitleView}>
-                    <Text style={{ fontSize: 24, marginLeft: 10, fontWeight: 'bold' }}>Hawa Mahal</Text>
-                    <Text style={{ fontSize: 18, marginRight: 10, fontWeight: '600' }}>1.2 Km</Text>
-                </View>
-                <Text style={{ marginHorizontal: 10 }} numberOfLines={10} ellipsizeMode="tail" >
-                    The Hawa Mahal is a five-storey building, and it is the tallest building in the world that has been built without a foundation. It has a curved architecture that leans at an 87 degree angle, and a pyramidal shape which has helped it stay erect for centuries. The Hawa Mahal is dedicated to Lord Krishna.
-                </Text>
-                <TouchableOpacity onPress={openLink} style={{ marginLeft: 10, marginTop: 10 }}>
-                    <View>
-                        <Text style={styles.link}>Read more</Text>
+    const renderPlaces = (place) => {
+        console.log(`Render PlaceData = ${placesData}`)
+        // console.log(`Render Place = ${place}`)
+        console.log(JSON.stringify(place, null, 2));
+        return (
+            <View style={styles.placeContainer}>
+                <View style={{ overflow: 'hidden' }}>
+                    <View style={styles.placeTitleView}>
+                        <Text style={{ fontSize: 24, marginLeft: 10, fontWeight: 'bold' }}>{place.item.name}</Text>
+                        <Text style={{ fontSize: 18, marginRight: 10, fontWeight: '600' }}>1.2 Km</Text>
                     </View>
-                </TouchableOpacity>
-            </View>
-            <View style={{ alignItems: 'center' }}>
-                <View style={styles.placeButtonView}>
-                    <TouchableOpacity style={styles.placeButtons} onPress={showComingSoonAlert}>
-                        <View style={styles.button}>
-                            <Image
-                                source={require('../Images/icon_direction.png')}
-                                style={styles.icons}
-                            />
-                            <Text>
-                                Directions
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.placeButtons} onPress={showComingSoonAlert}>
-                        <View style={styles.button}>
-                            <Image
-                                source={require('../Images/icon_cab.png')}
-                                style={styles.icons}
-                            />
-                            <Text>
-                                Book Uber
-                            </Text>
+                    <Text style={{ marginHorizontal: 10 }} numberOfLines={10} ellipsizeMode="tail" >
+                        {place.item.description}
+                    </Text>
+                    <TouchableOpacity onPress={() => openLink(place.item.wikipedia_link)} style={{ marginLeft: 10, marginTop: 10 }}>
+                        <View>
+                            <Text style={styles.link}>Read more</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Image
-                        source={require('../Images/HawaMahal1.jpeg')}
-                        style={styles.placeImages}
-                    />
-                    <Image
-                        source={require('../Images/HawaMahal2.jpeg')}
-                        style={styles.placeImages}
-                    />
-                    <Image
-                        source={require('../Images/HawaMahal3.jpeg')}
-                        style={styles.placeImages}
-                    />
+                <View style={{ alignItems: 'center' }}>
+                    <View style={styles.placeButtonView}>
+                        <TouchableOpacity style={styles.placeButtons} onPress={showComingSoonAlert}>
+                            <View style={styles.button}>
+                                <Image
+                                    source={require('../Images/icon_direction.png')}
+                                    style={styles.icons}
+                                />
+                                <Text>
+                                    Directions
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.placeButtons} onPress={showComingSoonAlert}>
+                            <View style={styles.button}>
+                                <Image
+                                    source={require('../Images/icon_cab.png')}
+                                    style={styles.icons}
+                                />
+                                <Text>
+                                    Book Uber
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image
+                            source={require('../Images/HawaMahal1.jpeg')}
+                            style={styles.placeImages}
+                        />
+                        <Image
+                            source={require('../Images/HawaMahal2.jpeg')}
+                            style={styles.placeImages}
+                        />
+                        <Image
+                            source={require('../Images/HawaMahal3.jpeg')}
+                            style={styles.placeImages}
+                        />
+                    </View>
                 </View>
             </View>
-        </View>
-    )
+        )
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

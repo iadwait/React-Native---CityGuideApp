@@ -16,7 +16,11 @@ const HomeScreen = () => {
         try {
             const data = await fetchCitiesListData();
             console.log(JSON.stringify(data, null, 2));
-            setCitiesData(data)
+            if (Array.isArray(data)) {
+                setCitiesData(data);
+            } else {
+                console.error("Fetched data is not an array:", data);
+            }
         } catch (error) {
             Alert.alert('Error', `Error fetching cities data: ${error}`)
         }
@@ -56,9 +60,11 @@ const HomeScreen = () => {
                     showsVerticalScrollIndicator={false}
                 >
                     {
-                        cities.map((city, index) => (
-                            <City key={index} city={city} />       
-                        ))
+                        cities.map((city, index) => {
+                            return (
+                                <City key={index} city={city} />
+                            )
+                        })
                     }
                 </ScrollView>
             </View>
