@@ -1,7 +1,8 @@
 import axios from "axios";
+import { Platform } from "react-native";
 
 // Endpoints
-const baseURL = "http://10.0.2.2" // Insted of localhost we use 10.0.2.2 otherwise error for Android
+const baseURL = Platform.OS === 'ios' ? "http://localhost" : "http://10.0.2.2" // Insted of localhost we use 10.0.2.2 otherwise error for Android
 const citiesEndpoint = `${baseURL}:3001/cities`
 const cityDetailsEndpoint = cityName => `${baseURL}:3002/cities?name=${cityName}`
 
