@@ -1,4 +1,4 @@
-# Steps to run the project (under development)
+# Steps to run the project
 
 1. Clone or download the zip file
 2. Navigate to 'CityGuide'
