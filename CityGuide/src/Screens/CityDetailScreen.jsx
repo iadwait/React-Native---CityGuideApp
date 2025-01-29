@@ -8,6 +8,7 @@ import Carousel from 'react-native-reanimated-carousel';
 import MapView, { Marker } from 'react-native-maps';
 import { Linking } from 'react-native'
 import { fetchCityData } from '../NetworkManager/NetworkManager'
+import Loader from '../Components/Loader'
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,6 +23,7 @@ const CityDetailScreen = ({ route }) => {
     })
     const [currentIndex, setCurrentIndex] = useState(0);
     const [placesData, setPlaceData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const showComingSoonAlert = () => {
         Alert.alert('Alert', 'Feature Coming Soon')
@@ -34,8 +36,11 @@ const CityDetailScreen = ({ route }) => {
 
     const fetchCityDetail = async () => {
         const data = await fetchCityData(cityData.name);
-        console.log('Complete: ', data[0])
-        setCityDetails(data[0]);
+        setTimeout(() => {
+            setLoading(false);
+            console.log('Complete: ', data[0])
+            setCityDetails(data[0]);
+        }, 1000)
     }
 
     // Update Local params after getting city details
@@ -62,6 +67,7 @@ const CityDetailScreen = ({ route }) => {
 
     useEffect(() => {
         console.log('Inside Details Screen')
+        setLoading(true);
         fetchCityDetail();
     }, [])
 
@@ -147,63 +153,74 @@ const CityDetailScreen = ({ route }) => {
                     />
                 </TouchableOpacity>
             </View>
-            {/* MapView */}
-            <View style={styles.mapView}>
-                <MapView
-                    style={styles.map}
-                    region={{
-                        latitude: coordinate.latitude,
-                        longitude: coordinate.longitude,
-                        latitudeDelta: 0.07,  // zoom level
-                        longitudeDelta: 0.07, // zoom level
-                    }}
-                    mapType="standard"
-                    onLayout={() => console.log('MapView Rendered')}
-                >
-                    {/* Add a marker on the map */}
-                    <Marker
-                        key="marker-1"
-                        coordinate={coordinate}
-                        title={cityDetails.name}
-                        description={`This is ${cityDetails.name} City !!`}
-                        pinColor="red"
-                        style={{ zIndex: 999 }}
-                    />
-                </MapView>
-            </View>
-            {/* Page Control */}
-            <View style={styles.pageControlView}>
-                {
-                    placesData.map((_, index) => (
-                        <View
-                            key={index}
-                            style={[
-                                styles.dot,
-                                currentIndex === index ? styles.activeDot : styles.inactiveDot,
-                            ]}
-                        >
+            {
+                loading ?
+                    (
+                        <Loader />
+                    )
+                    :
+                    (
+                        <View style={{ flex: 1 }}>
+                            {/* MapView */}
+                            <View style={styles.mapView}>
+                                <MapView
+                                    style={styles.map}
+                                    region={{
+                                        latitude: coordinate.latitude,
+                                        longitude: coordinate.longitude,
+                                        latitudeDelta: 0.07,  // zoom level
+                                        longitudeDelta: 0.07, // zoom level
+                                    }}
+                                    mapType="standard"
+                                    onLayout={() => console.log('MapView Rendered')}
+                                >
+                                    {/* Add a marker on the map */}
+                                    <Marker
+                                        key="marker-1"
+                                        coordinate={coordinate}
+                                        title={cityDetails.name}
+                                        description={`This is ${cityDetails.name} City !!`}
+                                        pinColor="red"
+                                        style={{ zIndex: 999 }}
+                                    />
+                                </MapView>
+                            </View>
+                            {/* Page Control */}
+                            <View style={styles.pageControlView}>
+                                {
+                                    placesData.map((_, index) => (
+                                        <View
+                                            key={index}
+                                            style={[
+                                                styles.dot,
+                                                currentIndex === index ? styles.activeDot : styles.inactiveDot,
+                                            ]}
+                                        >
+                                        </View>
+                                    ))
+                                }
+                            </View>
+                            {/* Places Details */}
+                            <View style={styles.placeView}>
+                                <Carousel
+                                    loop
+                                    // autoPlay
+                                    style={{
+                                        width: "100%",
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                    }}
+                                    width={width * 0.85}
+                                    // height={56}
+                                    data={placesData}
+                                    //scrollAnimationDuration={1500}
+                                    renderItem={renderPlaces}
+                                    onSnapToItem={(index) => setCurrentIndex(index)}
+                                />
+                            </View>
                         </View>
-                    ))
-                }
-            </View>
-            {/* Places Details */}
-            <View style={styles.placeView}>
-                <Carousel
-                    loop
-                    // autoPlay
-                    style={{
-                        width: "100%",
-                        justifyContent: "flex-start",
-                        alignItems: "center",
-                    }}
-                    width={width * 0.85}
-                    // height={56}
-                    data={placesData}
-                    //scrollAnimationDuration={1500}
-                    renderItem={renderPlaces}
-                    onSnapToItem={(index) => setCurrentIndex(index)}
-                />
-            </View>
+                    )
+            }
         </SafeAreaView>
     )
 }

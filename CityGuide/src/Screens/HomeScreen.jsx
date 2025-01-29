@@ -1,10 +1,11 @@
-import { View, Text, Button, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, Dimensions, StyleSheet, TextInput, Image, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import City from '../Components/City';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useState, useEffect } from 'react'
 import { fetchCitiesListData } from '../NetworkManager/NetworkManager';
+import Loader from '../Components/Loader';
 
 const { width, height } = Dimensions.get('window');
 
@@ -12,6 +13,7 @@ const HomeScreen = () => {
     const citiesEndpoint = 'http://localhost:3001/cities'
     const [cities, setCitiesData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [loading, setLoading] = useState(false);
     const filteredCities = cities.filter(city =>
         city.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -35,6 +37,9 @@ const HomeScreen = () => {
     const getCitiesDetails = async () => {
         try {
             const data = await fetchCitiesListData();
+            setTimeout(() => {
+                setLoading(false);
+            },1000)
             console.log(JSON.stringify(data, null, 2));
             if (Array.isArray(data)) {
                 setCitiesData(data);
@@ -48,6 +53,7 @@ const HomeScreen = () => {
 
     // View will Appear
     useEffect(() => {
+        setLoading(true)
         getCitiesDetails()
     }, [])
 
@@ -77,33 +83,40 @@ const HomeScreen = () => {
                 </View>
             </View>
             {
-                filteredCities.length > 0 ?
+                loading ?
                     (
-                        <View style={{ flex: 1 }}>
-                            {/* City List View*/}
-                            <ScrollView
-                                showsVerticalScrollIndicator={false}
-                            >
-                                {
-                                    filteredCities.map((city, index) => {
-                                        return (
-                                            <City
-                                                key={city.id}
-                                                city={city}
-                                                liked={city.liked}
-                                                onLikeToggle={onLikeToggleCallback} // Callback for Like
-                                            />
-                                        )
-                                    })
-                                }
-                            </ScrollView>
-                        </View>
+                        <Loader />
                     )
                     :
                     (
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>No Results</Text>
-                        </View>
+                        filteredCities.length > 0 ?
+                            (
+                                <View style={{ flex: 1 }}>
+                                    {/* City List View*/}
+                                    <ScrollView
+                                        showsVerticalScrollIndicator={false}
+                                    >
+                                        {
+                                            filteredCities.map((city, index) => {
+                                                return (
+                                                    <City
+                                                        key={city.id}
+                                                        city={city}
+                                                        liked={city.liked}
+                                                        onLikeToggle={onLikeToggleCallback} // Callback for Like
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </ScrollView>
+                                </View>
+                            )
+                            :
+                            (
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={{ color: 'black', fontWeight: 'bold' }}>No Results</Text>
+                                </View>
+                            )
                     )
             }
         </SafeAreaView>
