@@ -39,7 +39,11 @@ const CityDetailScreen = ({ route }) => {
         setTimeout(() => {
             setLoading(false);
             console.log('Complete: ', data[0])
-            setCityDetails(data[0]);
+            if (Array.isArray(data)) {
+                setCityDetails(data[0]);
+            } else {
+                Alert.alert('Error', `Fetched data is not an array: ${data}`)
+            }
         }, 1000)
     }
 
@@ -60,10 +64,6 @@ const CityDetailScreen = ({ route }) => {
         }
 
     }, [cityDetails]);  // This effect will run whenever cityDetails is updated
-
-    useEffect(() => {
-        console.log(`Updated Places = ${placesData}`);
-    }, [placesData]);  // This will log placesData when it change
 
     useEffect(() => {
         console.log('Inside Details Screen')

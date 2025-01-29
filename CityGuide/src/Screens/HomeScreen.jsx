@@ -39,15 +39,19 @@ const HomeScreen = () => {
             const data = await fetchCitiesListData();
             setTimeout(() => {
                 setLoading(false);
-            },1000)
-            console.log(JSON.stringify(data, null, 2));
-            if (Array.isArray(data)) {
-                setCitiesData(data);
-            } else {
-                console.error("Fetched data is not an array:", data);
-            }
+                console.log(JSON.stringify(data, null, 2));
+                if (Array.isArray(data)) {
+                    setCitiesData(data);
+                } else {
+                    Alert.alert('Error', `Fetched data is not an array: ${data}`)
+                    console.error("Fetched data is not an array:", data);
+                }
+            }, 1000)
         } catch (error) {
-            Alert.alert('Error', `Error fetching cities data: ${error}`)
+            setTimeout(() => {
+                setLoading(false);
+                Alert.alert('Error', `Error fetching cities data: ${error}`)
+            }, 1000)
         }
     }
 
