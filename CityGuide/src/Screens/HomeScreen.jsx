@@ -21,6 +21,17 @@ const HomeScreen = () => {
         setSearchQuery('');
     }
 
+    // Delegate Method Callback
+    const onLikeToggleCallback = (cityId) => {
+        console.log(`Callback received: ${cityId}`)
+        // Update Like Status in Cities Array
+        setCitiesData((cities) => {
+            return cities.map((city) =>
+                city.id === cityId ? { ...city, liked: !city.liked } : city
+            )
+        })
+    }
+
     const getCitiesDetails = async () => {
         try {
             const data = await fetchCitiesListData();
@@ -74,7 +85,12 @@ const HomeScreen = () => {
                     {
                         filteredCities.map((city, index) => {
                             return (
-                                <City key={city.id} city={city} />
+                                <City
+                                    key={city.id}
+                                    city={city}
+                                    liked={city.liked}
+                                    onLikeToggle={onLikeToggleCallback} // Callback for Like
+                                />
                             )
                         })
                     }

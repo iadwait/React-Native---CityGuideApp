@@ -6,15 +6,22 @@ import { useNavigation } from '@react-navigation/native'
 
 const { width, height } = Dimensions.get('window');
 
-const City = ({ city }) => {
+const City = ({ city, liked, onLikeToggle }) => {
     const navigation = useNavigation();
-    const [favourite, setFavourite] = useState(false);
+
     useEffect(() => {
         console.log(city)
     }, [])
+
+    // Call delegate method
+    const toggleFavourite = () => {
+        console.log(`toggleFavourite: ${city.id}`)
+        onLikeToggle(city.id)
+    }
+
     return (
         <View style={{ alignItems: 'center' }}>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('CityDetail', {cityData: city, isLiked: favourite})}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('CityDetail', {cityData: city, isLiked: liked})}>
                 {/* City Element */}
                 <View style={styles.cityElement}>
                     {/* View Top */}
@@ -25,10 +32,10 @@ const City = ({ city }) => {
                             style={styles.cityImage}
                         />
                         <Text style={styles.cityName}>{city.name}</Text>
-                        <TouchableOpacity style={styles.heartIcon} onPress={() => setFavourite(!favourite)}>
+                        <TouchableOpacity style={styles.heartIcon} onPress={toggleFavourite}>
                             <HeartIcon
                                 size="35"
-                                color={favourite ? 'red' : 'white'} />
+                                color={liked ? 'red' : 'white'} />
                         </TouchableOpacity>
                         <View style={styles.viewInfo}>
                             <Text style={styles.textInfo}>
