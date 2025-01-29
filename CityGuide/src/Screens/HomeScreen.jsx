@@ -53,49 +53,59 @@ const HomeScreen = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
-                {/* Search View */}
-                <View style={styles.searchView}>
-                    <View style={styles.inputContainer}>
+            {/* Search View */}
+            <View style={styles.searchView}>
+                <View style={styles.inputContainer}>
+                    <Image
+                        source={require('../Images/icon_search.png')}
+                        style={styles.icons}
+                    />
+                    <TextInput
+                        placeholder='Search Cities...'
+                        style={styles.textInput}
+                        value={searchQuery}
+                        onChangeText={setSearchQuery}
+                    />
+                </View>
+                <View style={{ paddingRight: 6 }}>
+                    <TouchableOpacity onPress={resetSearchQuery}>
                         <Image
-                            source={require('../Images/icon_search.png')}
+                            source={require('../Images/icon_cross.png')}
                             style={styles.icons}
                         />
-                        <TextInput
-                            placeholder='Search Cities...'
-                            style={styles.textInput} 
-                            value={searchQuery}
-                            onChangeText={setSearchQuery}
-                            />
-                    </View>
-                    <View style={{ paddingRight: 6 }}>
-                        <TouchableOpacity onPress={resetSearchQuery}>
-                            <Image
-                                source={require('../Images/icon_cross.png')}
-                                style={styles.icons}
-                            />
-                        </TouchableOpacity>
-                    </View>
+                    </TouchableOpacity>
                 </View>
-
-                {/* City List View*/}
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                >
-                    {
-                        filteredCities.map((city, index) => {
-                            return (
-                                <City
-                                    key={city.id}
-                                    city={city}
-                                    liked={city.liked}
-                                    onLikeToggle={onLikeToggleCallback} // Callback for Like
-                                />
-                            )
-                        })
-                    }
-                </ScrollView>
             </View>
+            {
+                filteredCities.length > 0 ?
+                    (
+                        <View style={{ flex: 1 }}>
+                            {/* City List View*/}
+                            <ScrollView
+                                showsVerticalScrollIndicator={false}
+                            >
+                                {
+                                    filteredCities.map((city, index) => {
+                                        return (
+                                            <City
+                                                key={city.id}
+                                                city={city}
+                                                liked={city.liked}
+                                                onLikeToggle={onLikeToggleCallback} // Callback for Like
+                                            />
+                                        )
+                                    })
+                                }
+                            </ScrollView>
+                        </View>
+                    )
+                    :
+                    (
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: 'black', fontWeight: 'bold' }}>No Results</Text>
+                        </View>
+                    )
+            }
         </SafeAreaView>
     )
 }
