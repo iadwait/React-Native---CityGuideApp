@@ -11,6 +11,15 @@ const { width, height } = Dimensions.get('window');
 const HomeScreen = () => {
     const citiesEndpoint = 'http://localhost:3001/cities'
     const [cities, setCitiesData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const filteredCities = cities.filter(city =>
+        city.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+
+    const resetSearchQuery = () => {
+        console.log('Inside Reset')
+        setSearchQuery('');
+    }
 
     const getCitiesDetails = async () => {
         try {
@@ -43,10 +52,13 @@ const HomeScreen = () => {
                         />
                         <TextInput
                             placeholder='Search Cities...'
-                            style={styles.textInput} />
+                            style={styles.textInput} 
+                            value={searchQuery}
+                            onChangeText={setSearchQuery}
+                            />
                     </View>
                     <View style={{ paddingRight: 6 }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={resetSearchQuery}>
                             <Image
                                 source={require('../Images/icon_cross.png')}
                                 style={styles.icons}
@@ -60,9 +72,9 @@ const HomeScreen = () => {
                     showsVerticalScrollIndicator={false}
                 >
                     {
-                        cities.map((city, index) => {
+                        filteredCities.map((city, index) => {
                             return (
-                                <City key={index} city={city} />
+                                <City key={city.id} city={city} />
                             )
                         })
                     }

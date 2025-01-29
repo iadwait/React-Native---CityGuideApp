@@ -158,9 +158,11 @@ const CityDetailScreen = ({ route }) => {
                         longitudeDelta: 0.07, // zoom level
                     }}
                     mapType="standard"
+                    onLayout={() => console.log('MapView Rendered')}
                 >
                     {/* Add a marker on the map */}
                     <Marker
+                        key="marker-1"
                         coordinate={coordinate}
                         title={cityDetails.name}
                         description={`This is ${cityDetails.name} City !!`}
