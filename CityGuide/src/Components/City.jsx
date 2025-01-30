@@ -10,7 +10,7 @@ const City = ({ city, liked, onLikeToggle }) => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        console.log(city)
+        //console.log(city)
     }, [])
 
     // Call delegate method

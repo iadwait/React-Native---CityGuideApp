@@ -6,17 +6,35 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useState, useEffect } from 'react'
 import { fetchCitiesListData } from '../NetworkManager/NetworkManager';
 import Loader from '../Components/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveCityList } from '../Redux/Slice/CityListSlice'
+import { useFocusEffect } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
-    const citiesEndpoint = 'http://localhost:3001/cities'
     const [cities, setCitiesData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const filteredCities = cities.filter(city =>
         city.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
+    // Store
+    const cityListStoreVal = useSelector((state) => state.cityListState.cityList)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (JSON.stringify(cityListStoreVal) !== JSON.stringify(cities)) {
+            console.log(`New Cities Assigning`)
+            console.log('cityListStoreVal: ', cityListStoreVal.length)
+            if (cityListStoreVal && cityListStoreVal.length > 0) {
+                console.log(`New Cities Assigned`)
+                setCitiesData(cityListStoreVal);
+            }
+        } else {
+            console.log('cityListStoreVal is same as cities')
+        }
+    }, [cityListStoreVal]);
 
     const resetSearchQuery = () => {
         console.log('Inside Reset')
@@ -39,9 +57,13 @@ const HomeScreen = () => {
             const data = await fetchCitiesListData();
             setTimeout(() => {
                 setLoading(false);
-                console.log(JSON.stringify(data, null, 2));
                 if (Array.isArray(data)) {
-                    setCitiesData(data);
+                    if (data.length > 0) {
+                        setCitiesData(data);
+                        dispatch(saveCityList(data)) // Save to Store
+                    } else {
+                        Alert.alert('Error, CityList Data is empty from api')
+                    }
                 } else {
                     Alert.alert('Error', `Fetched data is not an array: ${data}`)
                     console.error("Fetched data is not an array:", data);
@@ -55,7 +77,7 @@ const HomeScreen = () => {
         }
     }
 
-    // View will Appear
+    // View did load
     useEffect(() => {
         setLoading(true)
         getCitiesDetails()

@@ -16,8 +16,8 @@ const makeApiCall = async (endpoint, params) => {
     try {
         const response = await axios.request(options)
         //console.log(`API Response: ${response.data}`)
-        console.log("API RESPONSE: ##")
-        console.log(JSON.stringify(response.data, null, 2));
+        //console.log("API RESPONSE: ##")
+        //console.log(JSON.stringify(response.data, null, 2));
         return response.data
     } catch (error) {
         console.log('Error Occured:', error)

@@ -9,12 +9,15 @@ import MapView, { Marker } from 'react-native-maps';
 import { Linking } from 'react-native'
 import { fetchCityData } from '../NetworkManager/NetworkManager'
 import Loader from '../Components/Loader'
+import { updateCityListLikeData } from '../Redux/Slice/CityListSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const { width, height } = Dimensions.get('window');
 
 const CityDetailScreen = ({ route }) => {
     // Get Passed Data
     const { cityData, isLiked } = route.params
+    const [isLikedLocal, setIsLikedLocal] = useState(isLiked)
     const navigation = useNavigation();
     const [cityDetails, setCityDetails] = useState({})
     const [coordinate, setCoordinates] = useState({
@@ -24,6 +27,8 @@ const CityDetailScreen = ({ route }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [placesData, setPlaceData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const cityListStoreVal = useSelector((state) => state.cityListState)
 
     const showComingSoonAlert = () => {
         Alert.alert('Alert', 'Feature Coming Soon')
@@ -33,6 +38,25 @@ const CityDetailScreen = ({ route }) => {
         const url = link
         Linking.openURL(url).catch(err => Alert.alert('Error', 'Error Opening Browser'))
     }
+
+    const logStoreCityList = () => {
+        // console.log("cityListStoreVal START:------------ ")
+        // console.log(cityListStoreVal)
+        // console.log("cityListStoreVal END:------------ ")
+    }
+
+    const toggleLikeForCity = () => {
+        logStoreCityList()
+        // Update UI
+        let toggleFav = !isLikedLocal
+        setIsLikedLocal(toggleFav)
+        console.log(`Toggle isLiked for cityID: ${cityData.id}`)
+        dispatch(updateCityListLikeData({id: cityData.id, isLiked: toggleFav}))
+    }
+
+    useEffect(() => {
+        logStoreCityList()
+    }, [cityListStoreVal])
 
     const fetchCityDetail = async () => {
         const data = await fetchCityData(cityData.name);
@@ -54,27 +78,24 @@ const CityDetailScreen = ({ route }) => {
                 latitude: cityDetails.latitude,
                 longitude: cityDetails.longitude,
             });
-            console.log(`Lat = ${cityDetails.latitude}, Long = ${cityDetails.longitude}`);
         }
 
         if (cityDetails && cityDetails.places) {
-            console.log('Places = ', cityDetails.places.length)
             setPlaceData(cityDetails.places)
-            console.log(`Places = ${placesData}`)
         }
 
     }, [cityDetails]);  // This effect will run whenever cityDetails is updated
 
     useEffect(() => {
-        console.log('Inside Details Screen')
+        //console.log('Inside Details Screen')
         setLoading(true);
         fetchCityDetail();
     }, [])
 
     const renderPlaces = (place) => {
-        console.log(`Render PlaceData = ${placesData}`)
+        //console.log(`Render PlaceData = ${placesData}`)
         // console.log(`Render Place = ${place}`)
-        console.log(JSON.stringify(place, null, 2));
+        //console.log(JSON.stringify(place, null, 2));
         return (
             <View style={styles.placeContainer}>
                 <View style={{ overflow: 'hidden' }}>
@@ -146,10 +167,10 @@ const CityDetailScreen = ({ route }) => {
                     />
                 </TouchableOpacity>
                 <Text style={styles.title}>{cityData.name}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={toggleLikeForCity}>
                     <HeartIcon
                         size="35"
-                        color={isLiked ? 'red' : 'lightgray'}
+                        color={isLikedLocal ? 'red' : 'lightgray'}
                     />
                 </TouchableOpacity>
             </View>
