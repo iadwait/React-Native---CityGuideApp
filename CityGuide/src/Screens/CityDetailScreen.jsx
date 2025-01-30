@@ -68,7 +68,7 @@ const CityDetailScreen = ({ route }) => {
             } else {
                 Alert.alert('Error', `Fetched data is not an array: ${data}`)
             }
-        }, 1000)
+        }, 2000)
     }
 
     // Update Local params after getting city details

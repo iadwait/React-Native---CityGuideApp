@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     viewInfo: {
         position: 'absolute',
-        bottom: '10',
+        bottom: 10,
         right: 10
     },
     textInfo: {
